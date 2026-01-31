@@ -4,7 +4,6 @@ import Home from "./pages/home";
 import Chart from "./pages/chart";
 import NotFound from "./pages/notfound";
 import Customer from "./pages/customer";
-import _App from "./_App.jsx";
 import Orders from "./pages/orders/index.jsx";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-      <_App />
     </>
   );
 }

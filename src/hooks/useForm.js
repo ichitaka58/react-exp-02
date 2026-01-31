@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import "./App.css";
-import News from "./components/News";
 
+// カスタムフックはuseXXXXという命名をつけることが慣習的に決まっています
 
-function _App() {
+export const useForm = () => {
+
+  // この下に他のファイルの記述をお引越ししたものを貼り付ける
   // inputが２個あるので、入力したものを保持するためにuseStateが２つ必要
   const [name, setName] = useState("名前入力");
   const [email, setEmail] = useState("メールアドレス入力");
@@ -36,7 +37,7 @@ function _App() {
         console.log(data, "中身");
         // 取得したjsの形のデータをuseStateの更新の処理で上書きする
         setData(data);
-      }catch(error) {
+      } catch (error) {
 
         // おまじないの処理の終わり、下は消さない
       }
@@ -50,39 +51,17 @@ function _App() {
 
   console.log("順番の確認");
 
-  return (
-    <>
-      {/*  */}
-      <h1>データを表示する方法</h1>
-      {data.map((item) => (
-        <div key={item.id}>
-          <p>{item.id}</p>
-          <p>{item.title}</p>
-          <p>{item.userId}</p>
-        </div>
-      ))}
 
-      <div>
-        <p>名前が入ります</p>
-        <input
-          type="text"
-          placeholder="名前を入力してください"
-          value={name}
-          onChange={handleNameChange}
-        />
-      </div>
-      <div>
-        <p>メールアドレスが入ります</p>
-        <input
-          type="text"
-          placeholder="メールアドレスを入力してください"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
-      {/*  */}
-    </>
-  );
+  // ここがポイント！以下でreturnというものを使い、他のファイルで呼び出せるようにする記述方法です
+
+  return {
+    // この中に各reactのおまじないや、jsのおまじないを記述する
+    handleNameChange,
+    handleEmailChange,
+    name,
+    email,
+    data,
+  };
+
+  // この下は消さない
 }
-
-export default _App;
